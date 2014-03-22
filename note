@@ -1,0 +1,59 @@
+LING572 HW2
+Nat Byington
+Mami Sasaki 
+21/Jan/2010
+
+Q1
+(a)
+info2vectors --input ../../dropbox/09-10/572/hw2/examples/train.vectors.txt --output train.vectors
+
+info2vectors --use-pipe-from train.vectors --input ../../dropbox/09-10/572/hw2/examples/test.vectors.txt --output test.vectors
+
+vectors2classify --training-file train.vectors --testing-file test.vectors --trainer DecisionTree >test.stdout 2>test.stderr 
+
+(b)
+training accuracy = 0.6377777777777778
+test accuracy =  0.5233333333333333
+
+Q2
+Please look at q2.sh, binarize.py and diff.log
+diff.log proves the Mallet DT learner treat 
+the features in the input file as binary.
+
+Q3
+(a)
+Table 1
+Depth	Training accuracy	Test accuracy
+1	0.45296296296296296	0.4166666666666667
+2	0.5207407407407407	0.526666666666666	
+4	0.6377777777777778	0.5233333333333333
+10	0.7514814814814815	0.6
+20	0.8555555555555555	0.6833333333333333
+50	0.9681481481481482	0.7
+100	0.9685185185185186	0.7
+1000	0.9685185185185186	0.7
+
+(b)
+First, notice that the default depth is 4 by comparing Table 1 with Q1(b).
+Also, the deeper the depth is, the better the performance on both training and test accuracy. But after 50, there is no significant improvement in performance.
+
+
+Q5
+Table 2 (min_gain=0)
+Depth   Training accuracy       Test accuracy		Clock time(in minutes)
+1       0.452962962963	        0.4166666666666667 	2m03s
+2       0.520740740741	     	0.53			4m38s
+4       0.637037037037	        0.526666666667		7m55s	
+10      0.751851851852		0.606666666667		13m7s
+20      0.852962962963		0.676666666667		16m25s
+50      0.945925925926		0.686666666667		17m55s
+
+Table 3 (min_gain=0.1) 
+Depth   Training accuracy       Test accuracy           Clock time(in minutes)
+1       0.452962962963          0.4166666666666667      2m03s
+2       0.52                    0.53                    4m38s
+4       0.601481481481          0.54                    7m35s
+10	0.601481481481		0.54		  	7m34s		
+20	0.601481481481          0.54                    7m37s
+50	0.601481481481          0.54                    7m37s
+
